@@ -7,7 +7,7 @@ This image is useful to compile .netcore or nodejs applications in an isolated e
 
 ## How to build the image:
 
-docker build -t tfs-agent-docker .
+docker build --build-arg ARG_DOTNET_SDK_VERSION=1.0.1 --build-arg ARG_NODE_VERSION=6.9.4 -t tfs-agent-docker .
 
 
 ## How to create and run a container from the image:

@@ -24,6 +24,9 @@ elif [ "$AUTHTYPE" == "PATH" ]; then
     echo 1>&2 error: missing VSTS_TOKEN environment variable
     exit 1
   fi
+else
+    echo 1>&2 error: no authentication defined. Available authentication types: "Negotiate", "PAT"
+    exit 1
 fi
 
 if [ -n "$VSTS_AGENT" ]; then
@@ -63,7 +66,7 @@ if [ "$AUTHTYPE" == "PAT" ]; then
     --pool "${VSTS_POOL:-Default}" \
     --work "${VSTS_WORK:-_work}" \
     --replace & wait $!
-else
+elif [ "$AUTHTYPE" == "Negotiate" ]; then
   ./bin/Agent.Listener configure --unattended \
     --agent "${VSTS_AGENT:-$(hostname)}" \
     --url "$TFS_URL" \

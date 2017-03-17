@@ -57,7 +57,6 @@ fi
 source ./env.sh
 
 if [ "$AUTHTYPE" == "PAT" ]; then
-
   ./bin/Agent.Listener configure --unattended \
     --agent "${VSTS_AGENT:-$(hostname)}" \
     --url "$TFS_URL" \
@@ -78,4 +77,4 @@ elif [ "$AUTHTYPE" == "Negotiate" ]; then
     --replace & wait $!
 fi
 
-./bin/Agent.Listener run & wait $!
+  ./bin/Agent.Listener run & wait $!

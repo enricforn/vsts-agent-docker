@@ -41,9 +41,16 @@ fi
 cd /vsts/agent
 
 cleanup() {
-  ./bin/Agent.Listener remove --unattended \
-    --auth PAT \
-    --token "$VSTS_TOKEN"
+  if [ "$AUTHTYPE" == "PAT" ]; then
+    ./bin/Agent.Listener remove --unattended \
+      --auth PAT \
+      --token "$VSTS_TOKEN"
+  elif [ "$AUTHTYPE" == "Negotiate" ]; then
+    ./bin/Agent.Listener remove --unattended \
+    --auth Negotiate \
+    --username "$VSTS_USER" \
+    --password "$VSTS_PASSWORD"
+  fi
 }
 
 trap 'cleanup; exit 130' INT

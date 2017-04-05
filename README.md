@@ -21,6 +21,8 @@ docker run --privileged -v /var/run/docker.sock:/var/run/docker.sock -e TFS_HOST
 
 or
 
-docker run --privileged -v /var/run/docker.sock:/var/run/docker.sock -e VSTS_ACCOUNT=enformat -e AUTHTYPE=PAT -e VSTS_TOKEN=ekgso7akvxsbvdnef6y4ci7g6onueicyacje2iwwjtpmedvjuf2q -e VSTS_WORK=_work -e VSTS_POOL=docker -d tfs-agent-docker
+docker run --privileged -v /var/run/docker.sock:/var/run/docker.sock -e VSTS_ACCOUNT=enformat -e AUTHTYPE=PAT -e VSTS_TOKEN=**************************************************** -e VSTS_WORK=_work -e VSTS_POOL=docker -d tfs-agent-docker
 
+or 
 
+docker run --privileged -v /var/run/docker.sock:/var/run/docker.sock -e VSTS_ACCOUNT=enformat -e AUTHTYPE=Negotiate -e VSTS_USER=domain\user.to.connect.to.tfs -e VSTS_PASSWORD=******************** -e VSTS_WORK=_work -e VSTS_POOL=docker -d tfs-agent-docker

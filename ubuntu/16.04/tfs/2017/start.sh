@@ -19,7 +19,7 @@ if [ "$AUTHTYPE" == "Negotiate" ]; then
     echo 1>&2 error: missing VSTS_PASSWORD environment variable
     exit 1
   fi
-elif [ "$AUTHTYPE" == "PATH" ]; then
+elif [ "$AUTHTYPE" == "PAT" ]; then
   if [ -z "$VSTS_TOKEN" ]; then
     echo 1>&2 error: missing VSTS_TOKEN environment variable
     exit 1

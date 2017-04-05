@@ -1,27 +1,21 @@
 FROM ubuntu:16.04
 
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-        software-properties-common \
- && apt-add-repository ppa:git-core/ppa \
- && apt-get update \
- && apt-get install -y --no-install-recommends \
-        curl \
-        git \
-        libcurl3 \
-        libicu55 \
-        libunwind8 \
-        nano \
-        xz-utils \
- && rm -rf /var/lib/apt/lists/*
+#This image allows to compile netcore or nodejs applications, and create docker images
+
+ARG ARG_DOTNET_SDK_VERSION
+ARG ARG_NODE_VERSION
+
+RUN yum -y install curl-devel \
+                    expat-devel \
+                    gettext-devel \
+                    openssl-devel \
+                    zlib-devel \
+                    git \
+                    wget
 
 # Install .NET Core SDK
 ENV DOTNET_SDK_VERSION ${ARG_DOTNET_SDK_VERSION}
 ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev--`uname -s`-`uname -m`.$DOTNET_SDK_VERSION.tar.gz
-
-RUN curl -SL http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-8ubuntu0.2_amd64.deb --output libicu52_52.1-8ubuntu0.2_amd64.deb \
-    && dpkg -i libicu52_52.1-8ubuntu0.2_amd64.deb \
-    && rm libicu52_52.1-8ubuntu0.2_amd64.deb
 
 RUN curl -SL $DOTNET_SDK_DOWNLOAD_URL --output dotnet.tar.gz \
     && mkdir -p /usr/share/dotnet \
@@ -110,7 +104,7 @@ RUN adduser --system --group vsts
 WORKDIR /home/vsts/agent
 
 RUN set -x \
- && curl -fSL https://github.com/Microsoft/vsts-agent/releases/download/v2.108.0/vsts-agent-ubuntu.16.04-x64-2.108.0.tar.gz -o agent.tgz \
+ && curl -fSL https://github.com/Microsoft/vsts-agent/releases/download/v2.114.0/vsts-agent-rhel.7.2-x64-2.114.0.tar.gz -o agent.tgz \
  && tar -xzf agent.tgz \
  && chown -R vsts:vsts . \
  && rm agent.tgz

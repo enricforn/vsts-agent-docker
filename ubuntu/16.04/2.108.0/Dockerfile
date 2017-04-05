@@ -1,5 +1,10 @@
 FROM ubuntu:16.04
 
+#This image allows to compile netcore or nodejs applications, and create docker images
+
+ARG ARG_DOTNET_SDK_VERSION
+ARG ARG_NODE_VERSION
+
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
         software-properties-common \

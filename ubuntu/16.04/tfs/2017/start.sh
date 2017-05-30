@@ -103,7 +103,4 @@ elif [ "$AUTHTYPE" == "Negotiate" ]; then
     --replace & wait $!
 fi
 
-
-
-
-  ./bin/Agent.Listener run & wait $!
+./bin/Agent.Listener run & wait $!

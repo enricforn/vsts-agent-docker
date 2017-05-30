@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM centos:7.2.1511
 
 #This image allows to compile netcore or nodejs applications, and create docker images
 
@@ -11,11 +11,12 @@ RUN yum -y install curl-devel \
                     openssl-devel \
                     zlib-devel \
                     git \
+                    curl \
                     wget
 
 # Install .NET Core SDK
 ENV DOTNET_SDK_VERSION ${ARG_DOTNET_SDK_VERSION}
-ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-dev--`uname -s`-`uname -m`.$DOTNET_SDK_VERSION.tar.gz
+ENV DOTNET_SDK_DOWNLOAD_URL https://dotnetcli.blob.core.windows.net/dotnet/Sdk/master/dotnet-dev-rhel-x64.$DOTNET_SDK_VERSION.tar.gz
 
 RUN curl -SL $DOTNET_SDK_DOWNLOAD_URL --output dotnet.tar.gz \
     && mkdir -p /usr/share/dotnet \
